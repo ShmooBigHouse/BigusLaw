@@ -15,13 +15,17 @@ const Footer = () => {
               <p className="text-blue-400 mt-2">Attorney at Law</p>
             </div>
             <div className="mt-4 space-y-2">
-              <Link href="/about" className="text-gray-300 hover:text-blue-400 transition-colors duration-200">
-                About my practice
-              </Link>
-              <div className="text-sm text-gray-400 mt-4">
+              <div className="inline-block">
+                <Link href="/about" className="text-gray-300 hover:text-blue-400 transition-colors duration-200 inline-block">
+                  About my practice
+                </Link>
+              </div>
+              <div className="text-sm text-gray-400 mt-4 space-y-2">
+                <p>Licensed in Kansas and Missouri</p>
+              </div>
+              <div className="text-sm text-gray-400 mt-4 space-y-1">
                 <p>Kansas Bar Admission: 1984</p>
                 <p>Missouri Bar Admission: 1991</p>
-                <p className="mt-2">Licensed in Kansas & Missouri</p>
               </div>
             </div>
           </div>
@@ -34,69 +38,137 @@ const Footer = () => {
             <div className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2">
               {/* First Column */}
               <div className="space-y-2">
-                <Link href="/criminal-defense" className="text-gray-300 hover:text-blue-400 transition-colors duration-200">
-                  Criminal Defense
-                </Link>
-                <div className="pl-4 text-sm space-y-1">
-                  <Link href="/criminal-defense/felonies" className="block text-gray-400 hover:text-blue-400 transition-colors duration-200">
-                    Felonies
-                  </Link>
-                  <Link href="/criminal-defense/misdemeanors" className="block text-gray-400 hover:text-blue-400 transition-colors duration-200">
-                    Misdemeanors
-                  </Link>
-                  <Link href="/criminal-defense/traffic" className="block text-gray-400 hover:text-blue-400 transition-colors duration-200">
-                    Traffic
-                  </Link>
-                  <Link href="/criminal-defense/dui" className="block text-gray-400 hover:text-blue-400 transition-colors duration-200">
-                    DUI
+                <div className="inline-block">
+                  <Link href="/criminal-defense" className="text-gray-300 hover:text-blue-400 transition-colors duration-200 inline-block">
+                    Criminal Defense
                   </Link>
                 </div>
-                
-                <Link href="/mediation" className="text-gray-300 hover:text-blue-400 transition-colors duration-200">
-                  Mediation
-                </Link>
                 <div className="pl-4 text-sm space-y-1">
-                  <Link href="/mediation/core" className="block text-gray-400 hover:text-blue-400 transition-colors duration-200">
-                    Core
+                  <div className="inline-block">
+                    <Link href="/criminal-defense/felonies" className="text-gray-400 hover:text-blue-400 transition-colors duration-200 inline-block">
+                      Felonies
+                    </Link>
+                  </div>
+                  <br />
+                  <div className="inline-block">
+                    <Link href="/criminal-defense/misdemeanors" className="text-gray-400 hover:text-blue-400 transition-colors duration-200 inline-block">
+                      Misdemeanors
+                    </Link>
+                  </div>
+                  <br />
+                  <div className="inline-block">
+                    <Link href="/criminal-defense/traffic" className="text-gray-400 hover:text-blue-400 transition-colors duration-200 inline-block">
+                      Traffic
+                    </Link>
+                  </div>
+                  <br />
+                  <div className="inline-block">
+                    <Link href="/criminal-defense/dui" className="text-gray-400 hover:text-blue-400 transition-colors duration-200 inline-block">
+                      DUI
+                    </Link>
+                  </div>
+                  <br />
+                  <div className="inline-block">
+                    <Link href="/criminal-defense/drug-charges" className="text-gray-400 hover:text-blue-400 transition-colors duration-200 inline-block">
+                      Drug Charges
+                    </Link>
+                  </div>
+                  <br />
+                  <div className="inline-block">
+                    <Link href="/criminal-defense/juvenile" className="text-gray-400 hover:text-blue-400 transition-colors duration-200 inline-block">
+                      Juvenile
+                    </Link>
+                  </div>
+                  <br />
+                  <div className="inline-block">
+                    <Link href="/criminal-defense/abuse" className="text-gray-400 hover:text-blue-400 transition-colors duration-200 inline-block">
+                      Abuse
+                    </Link>
+                  </div>
+                  <br />
+                  <div className="inline-block">
+                    <Link href="/criminal-defense/appeals" className="text-gray-400 hover:text-blue-400 transition-colors duration-200 inline-block">
+                      Appeals
+                    </Link>
+                  </div>
+                </div>
+                
+                <div className="inline-block">
+                  <Link href="/mediation" className="text-gray-300 hover:text-blue-400 transition-colors duration-200 inline-block">
+                    Mediation
                   </Link>
-                  <Link href="/mediation/domestic" className="block text-gray-400 hover:text-blue-400 transition-colors duration-200">
-                    Domestic
-                  </Link>
+                </div>
+                <div className="pl-4 text-sm space-y-1">
+                  <div className="inline-block">
+                    <Link href="/mediation/core" className="text-gray-400 hover:text-blue-400 transition-colors duration-200 inline-block">
+                      Core
+                    </Link>
+                  </div>
+                  <br />
+                  <div className="inline-block">
+                    <Link href="/mediation/domestic" className="text-gray-400 hover:text-blue-400 transition-colors duration-200 inline-block">
+                      Domestic
+                    </Link>
+                  </div>
                 </div>
               </div>
 
               {/* Second Column */}
               <div className="space-y-2">
-                <Link href="/domestic" className="text-gray-300 hover:text-blue-400 transition-colors duration-200">
-                  Domestic Law
-                </Link>
-                <div className="pl-4 text-sm space-y-1">
-                  <Link href="/domestic/divorce" className="block text-gray-400 hover:text-blue-400 transition-colors duration-200">
-                    Divorce
-                  </Link>
-                  <Link href="/domestic/paternity" className="block text-gray-400 hover:text-blue-400 transition-colors duration-200">
-                    Paternity
-                  </Link>
-                  <Link href="/domestic/child-custody" className="block text-gray-400 hover:text-blue-400 transition-colors duration-200">
-                    Child Custody
-                  </Link>
-                  <Link href="/domestic/child-support" className="block text-gray-400 hover:text-blue-400 transition-colors duration-200">
-                    Child Support
-                  </Link>
-                  <Link href="/domestic/child-in-need-of-care" className="block text-gray-400 hover:text-blue-400 transition-colors duration-200">
-                    Child in Need of Care
-                  </Link>
-                  <Link href="/domestic/grandparents-rights" className="block text-gray-400 hover:text-blue-400 transition-colors duration-200">
-                    Grandparent's Rights
-                  </Link>
-                  <Link href="/domestic/adoption" className="block text-gray-400 hover:text-blue-400 transition-colors duration-200">
-                    Adoption
+                <div className="inline-block">
+                  <Link href="/domestic" className="text-gray-300 hover:text-blue-400 transition-colors duration-200 inline-block">
+                    Domestic Law
                   </Link>
                 </div>
+                <div className="pl-4 text-sm space-y-1">
+                  <div className="inline-block">
+                    <Link href="/domestic/divorce" className="text-gray-400 hover:text-blue-400 transition-colors duration-200 inline-block">
+                      Divorce
+                    </Link>
+                  </div>
+                  <br />
+                  <div className="inline-block">
+                    <Link href="/domestic/paternity" className="text-gray-400 hover:text-blue-400 transition-colors duration-200 inline-block">
+                      Paternity
+                    </Link>
+                  </div>
+                  <br />
+                  <div className="inline-block">
+                    <Link href="/domestic/child-custody" className="text-gray-400 hover:text-blue-400 transition-colors duration-200 inline-block">
+                      Child Custody
+                    </Link>
+                  </div>
+                  <br />
+                  <div className="inline-block">
+                    <Link href="/domestic/child-support" className="text-gray-400 hover:text-blue-400 transition-colors duration-200 inline-block">
+                      Child Support
+                    </Link>
+                  </div>
+                  <br />
+                  <div className="inline-block">
+                    <Link href="/domestic/child-in-need-of-care" className="text-gray-400 hover:text-blue-400 transition-colors duration-200 inline-block">
+                      Child in Need of Care
+                    </Link>
+                  </div>
+                  <br />
+                  <div className="inline-block">
+                    <Link href="/domestic/grandparents-rights" className="text-gray-400 hover:text-blue-400 transition-colors duration-200 inline-block">
+                      Grandparent's Rights
+                    </Link>
+                  </div>
+                  <br />
+                  <div className="inline-block">
+                    <Link href="/domestic/adoption" className="text-gray-400 hover:text-blue-400 transition-colors duration-200 inline-block">
+                      Adoption
+                    </Link>
+                  </div>
+                </div>
 
-                <Link href="/collections" className="text-gray-300 hover:text-blue-400 transition-colors duration-200">
-                  Collections
-                </Link>
+                <div className="inline-block">
+                  <Link href="/collections" className="text-gray-300 hover:text-blue-400 transition-colors duration-200 inline-block">
+                    Collections
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
@@ -114,18 +186,23 @@ const Footer = () => {
               </div>
               <div className="space-y-2">
                 <p className="text-gray-300">Get in Touch:</p>
-                <a href="tel:1-913-888-4520" 
-                   className="block text-gray-400 hover:text-blue-400 transition-colors duration-200">
-                  Office: (913) 888-4520
-                </a>
-                <a href="tel:1-913-221-4520" 
-                   className="block text-gray-400 hover:text-blue-400 transition-colors duration-200">
-                  Cell: (913) 221-4520
-                </a>
-                <a href="mailto:elbiguspa@gmail.com" 
-                   className="block text-gray-400 hover:text-blue-400 transition-colors duration-200">
-                  elbiguspa@gmail.com
-                </a>
+                <div className="inline-block">
+                  <a href="tel:1-913-888-4520" className="text-gray-400 hover:text-blue-400 transition-colors duration-200 inline-block">
+                    Office: (913) 888-4520
+                  </a>
+                </div>
+                <br />
+                <div className="inline-block">
+                  <a href="tel:1-913-221-4520" className="text-gray-400 hover:text-blue-400 transition-colors duration-200 inline-block">
+                    Cell: (913) 221-4520
+                  </a>
+                </div>
+                <br />
+                <div className="inline-block">
+                  <a href="mailto:elbiguspa@gmail.com" className="text-gray-400 hover:text-blue-400 transition-colors duration-200 inline-block">
+                    elbiguspa@gmail.com
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -134,20 +211,23 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="mt-12 pt-6 border-t-2 border-gray-600">
           <div className="flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
-            <p>© {currentYear} Edward L. Bigus. All rights reserved.</p>
+            <div className="space-y-2 md:space-y-0">
+              <p>© {currentYear} Edward L. Bigus. All rights reserved.</p>
+              <p className="text-xs text-gray-500">Designed by BigusDesign.com</p>
+            </div>
             <div className="flex space-x-6 mt-4 md:mt-0">
-              <Link href="/privacy-policy" 
-                    className="hover:text-blue-400 transition-colors duration-200">
-                Privacy Policy
-              </Link>
-              <Link href="/disclaimer" 
-                    className="hover:text-blue-400 transition-colors duration-200">
-                Disclaimer
-              </Link>
-              <Link href="/sitemap" 
-                    className="hover:text-blue-400 transition-colors duration-200">
-                Sitemap
-              </Link>
+              <div className="inline-block">
+                <Link href="/privacy-policy" className="hover:text-blue-400 transition-colors duration-200 inline-block">
+                  Privacy Policy
+                </Link>
+              </div>
+              <div className="inline-block">
+                <Link href="/disclaimer" className="hover:text-blue-400 transition-colors duration-200 inline-block">
+                  Disclaimer
+                </Link>
+              </div>
+              <div className="inline-block">
+              </div>
             </div>
           </div>
         </div>

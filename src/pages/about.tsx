@@ -127,7 +127,6 @@ const AboutPage = () => {
                   </div>
                 </div>
 
-                <hr className="border-t-2 border-gray-300 mt-8" />
               </div>
             </div>
           </div>

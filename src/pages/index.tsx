@@ -55,7 +55,6 @@ const Home: NextPage = () => {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <h2 className="text-2xl font-semibold text-gray-900 mb-6">About Ed Bigus</h2>
-          <hr className="border-t-2 border-gray-300 mb-8" />
           <p className="text-lg text-gray-700 mb-6">
             Ed is admitted in both Kansas and Missouri. He has been practicing law and assisting clients 
             for over 30 years. Ed knows when to compromise and when to fight for your rights. A native of Kansas, 
@@ -70,7 +69,6 @@ const Home: NextPage = () => {
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <h2 className="text-2xl font-semibold text-gray-900 mb-6">Practice Areas</h2>
-          <hr className="border-t-2 border-gray-300 mb-8" />
           <div className="grid md:grid-cols-3 gap-8">
             <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
               <h3 className="text-xl font-semibold mb-4">
@@ -114,7 +112,6 @@ const Home: NextPage = () => {
               </Link>
             </div>
           </div>
-          <hr className="border-t-2 border-gray-300 mt-8" />
         </div>
       </section>
 
