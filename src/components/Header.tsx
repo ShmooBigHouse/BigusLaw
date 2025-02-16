@@ -118,15 +118,16 @@ const Header = () => {
                 {item.dropdown && (
                   <div 
                     className="absolute left-0 hidden group-hover:block
-                              w-56 bg-white border-2 border-black rounded-b-lg shadow-xl z-[100]"
+                              w-56 bg-white border-2 border-black rounded-b-lg shadow-xl z-[100] overflow-hidden"
                     style={{ top: '100%' }}
                   >
-                    {item.dropdown.map((subItem) => (
+                    {item.dropdown.map((subItem, subIndex) => (
                       <Link
                         key={subItem}
                         href={`${item.path}/${subItem.toLowerCase().replace(/ /g, '-')}`}
-                        className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 
-                                 transition-colors duration-150"
+                        className={`block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 
+                                 transition-colors duration-150
+                                 ${subIndex === item.dropdown.length - 1 ? 'rounded-b-lg' : ''}`}
                       >
                         {subItem}
                       </Link>
