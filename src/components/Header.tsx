@@ -8,7 +8,11 @@ const Header = () => {
 
   const navItems = [
     { name: 'Home', path: '/' },
-    { name: 'About', path: '/about' },
+    { 
+      name: 'Mediation', 
+      path: '/mediation', 
+      dropdown: ['Core', 'Domestic'] 
+    },
     {
       name: 'Criminal Defense',
       path: '/criminal-defense',
@@ -27,12 +31,8 @@ const Header = () => {
         'Adoption'
       ]
     },
-    { 
-      name: 'Mediation', 
-      path: '/mediation', 
-      dropdown: ['Core', 'Domestic'] 
-    },
-    { name: 'Collections', path: '/collections' }
+    { name: 'Collections', path: '/collections' },
+    { name: 'About', path: '/about' }
   ];
 
   return (
@@ -74,22 +74,22 @@ const Header = () => {
 
           <div className="flex justify-center items-center h-full">
             <div className="text-white space-y-4">
-                <div className="flex items-center space-x-3 group">
-                  <Phone className="w-6 h-6 group-hover:text-blue-200 transition-colors drop-shadow-lg" />
-                  <a href="tel:1-913-888-4520" className="text-lg hover:text-blue-200 transition-colors drop-shadow-lg">
-                    Office: (913) 888-4520
+            <div className="flex items-center group">
+                  <a href="tel:1-913-888-4520" className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors duration-200 border-2 border-white w-64">
+                    <Phone className="w-5 h-5" />
+                    <span>Office: (913) 888-4520</span>
                   </a>
                 </div>
-                <div className="flex items-center space-x-3 group">
-                  <Phone className="w-6 h-6 group-hover:text-blue-200 transition-colors drop-shadow-lg" />
-                  <a href="tel:1-913-221-4520" className="text-lg hover:text-blue-200 transition-colors drop-shadow-lg">
-                    Cell: (913) 221-4520
+                <div className="flex items-center group">
+                  <a href="tel:1-913-221-4520" className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors duration-200 border-2 border-white w-64">
+                    <Phone className="w-5 h-5" />
+                    <span>Cell: (913) 221-4520</span>
                   </a>
                 </div>
-                <div className="flex items-center space-x-3 group">
-                  <Mail className="w-6 h-6 group-hover:text-blue-200 transition-colors drop-shadow-lg" />
-                  <a href="mailto:elbiguspa@gmail.com" className="text-lg hover:text-blue-200 transition-colors drop-shadow-lg">
-                    elbiguspa@gmail.com
+                <div className="flex items-center group">
+                  <a href="mailto:elbiguspa@gmail.com" className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors duration-200 border-2 border-white w-64">
+                    <Mail className="w-5 h-5" />
+                    <span>elbiguspa@gmail.com</span>
                   </a>
                 </div>
               </div>
