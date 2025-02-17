@@ -44,14 +44,14 @@ const Header = () => {
   ];
 
   return (
-    <header className="w-full bg-gradient-to-t from-blue-900 via-blue-800 to-blue-700">
+    <header className="relative w-full bg-gradient-to-t from-blue-900 via-blue-800 to-blue-700">
       {/* Subtle Pattern Overlay */}
       <div className="absolute inset-0 bg-[url('/subtle-pattern.png')] opacity-5"></div>
       
       {/* Accent Strip */}
       <div className="h-1 w-full bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600"></div>
 
-      <div className="w-full px-4 md:container md:mx-auto relative">
+      <div className="relative w-full px-4 md:container md:mx-auto">
         {/* Mobile Menu Button */}
         <div className="md:hidden absolute right-4 top-4 z-50">
           <button 
@@ -115,7 +115,7 @@ const Header = () => {
         </div>
 
         {/* Navigation */}
-        <nav className="relative flex justify-center z-50 overflow-x-auto">
+        <nav className="relative flex justify-center">
           {/* Desktop Navigation */}
           <div className="hidden md:inline-flex bg-white rounded-t-lg border-2 border-black shadow-lg">
             {navItems.map((item, index) => (
@@ -136,14 +136,20 @@ const Header = () => {
                 {item.dropdown && (
                   <div 
                     className="absolute left-0 hidden group-hover:block w-56 bg-white border-2 border-black rounded-b-lg shadow-xl"
-                    style={{ top: '100%' }}
+                    style={{ 
+                      top: '100%', 
+                      marginTop: '-2px',
+                      zIndex: 1000 // This is crucial for the dropdown visibility
+                    }}
                   >
-                    {item.dropdown.map((subItem) => (
+                    {item.dropdown.map((subItem, subIndex) => (
                       <Link
                         key={subItem}
                         href={`${item.path}/${subItem.toLowerCase().replace(/ /g, '-')}`}
-                        className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 
-                                 transition-colors duration-150"
+                        className={`block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 
+                                 transition-colors duration-150
+                                 ${subIndex === 0 ? 'rounded-t-lg' : ''}
+                                 ${subIndex === item.dropdown.length - 1 ? 'rounded-b-lg' : ''}`}
                       >
                         {subItem}
                       </Link>
@@ -155,7 +161,12 @@ const Header = () => {
           </div>
 
           {/* Mobile Navigation */}
-          <div className={`md:hidden fixed inset-0 bg-blue-900 z-40 transition-transform duration-300 ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'} overflow-y-auto`}>
+          <div 
+            className={`md:hidden fixed inset-0 bg-blue-900 transition-transform duration-300 ${
+              isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
+            }`}
+            style={{ zIndex: 999 }} // High z-index for mobile menu
+          >
             {/* Branding at top of mobile menu with gradient background */}
             <div className="bg-gradient-to-t from-blue-900 via-blue-800 to-blue-700 p-4 border-b border-blue-700/50 backdrop-blur-sm">
               <div className="flex items-center justify-center mb-4">
@@ -227,7 +238,7 @@ const Header = () => {
                 </div>
               ))}
             </div>
-          </div>
+           </div>
         </nav>
 
         <div className="border-b-2 border-black"></div>
