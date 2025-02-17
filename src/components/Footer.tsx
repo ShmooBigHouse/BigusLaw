@@ -5,8 +5,8 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
   
   return (
-    <footer className="bg-gray-900 text-gray-100 py-12 mt-auto">
-      <div className="container mx-auto px-4">
+    <footer className="w-full bg-gray-900 text-gray-100 py-12">
+      <div className="w-full px-4 md:container md:mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Practice Info */}
           <div>
@@ -31,7 +31,7 @@ const Footer = () => {
           </div>
 
           {/* Practice Areas */}
-          <div>
+          <div className="hidden md:block">
             <div className="h-[76px] border-b border-gray-700">
               <h3 className="text-2xl font-semibold text-white mb-6">Practice Areas</h3>
             </div>
