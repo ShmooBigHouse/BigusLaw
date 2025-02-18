@@ -1,9 +1,26 @@
 import React from 'react';
-import type { NextPage } from 'next';
+import type { NextPage, GetStaticProps } from 'next';
+import Head from 'next/head';
 import { Mail } from 'lucide-react';
 import ContactForm from '../../components/ContactForm';
 
-const ChildSupportPage: NextPage = () => {
+interface StateInfo {
+  state: string;
+  description: string;
+  custody_types: {
+    type: string;
+    description: string;
+    key_points: string[];
+  }[];
+  factors: string[];
+  modification_requirements: string[];
+}
+
+interface ChildSupportPageProps {
+  stateInfo: StateInfo[];
+}
+
+const ChildSupportPage: NextPage<ChildSupportPageProps> = ({ stateInfo = [] }) => {
   return (
     <div className="flex flex-col bg-white">
       <div className="w-full bg-gray-100">
@@ -126,6 +143,20 @@ const ChildSupportPage: NextPage = () => {
       </main>
     </div>
   );
+};
+
+export const getStaticProps: GetStaticProps<ChildSupportPageProps> = async (): Promise<{ 
+  props: ChildSupportPageProps; 
+  revalidate: number 
+}> => {
+  const stateInfo: StateInfo[] = [];
+
+  return {
+    props: {
+      stateInfo,
+    },
+    revalidate: 604800,
+  };
 };
 
 export default ChildSupportPage;

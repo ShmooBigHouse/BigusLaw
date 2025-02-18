@@ -1,50 +1,22 @@
 import React from 'react';
-import type { NextPage } from 'next';
+import type { NextPage, GetStaticProps } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Mail } from 'lucide-react';
 import ContactForm from '../components/ContactForm';
 
-const DomesticPage: NextPage = () => {
-  // The sacred scrolls of family law services - each one a path to harmony
-  const services = [
-    {
-      title: 'Divorce',
-      path: 'divorce',
-      desc: 'Guiding you through the divorce process with compassion and dedication to protect your interests.'
-    },
-    {
-      title: 'Paternity',
-      path: 'paternity',
-      desc: 'Establishing legal rights and responsibilities for parents and children through paternity actions.'
-    },
-    {
-      title: 'Child Custody',
-      path: 'child-custody',
-      desc: 'Creating custody arrangements that serve the best interests of your children while protecting parental rights.'
-    },
-    {
-      title: 'Child Support',
-      path: 'child-support',
-      desc: "Ensuring fair child support arrangements that provide for your children's needs."
-    },
-    {
-      title: 'Child in Need of Care',
-      path: 'child-in-need-of-care',
-      desc: 'Protecting vulnerable children and working with families to create safe, stable environments.'
-    },
-    {
-      title: "Grandparent's Rights",
-      path: 'grandparents-rights',
-      desc: 'Advocating for grandparents seeking to maintain meaningful relationships with their grandchildren.'
-    },
-    {
-      title: 'Adoption',
-      path: 'adoption',
-      desc: 'Helping families grow through the adoption process, ensuring legal security for all parties.'
-    }
-  ];
+// Our cosmic family law type definitions - like the DNA of our digital household
+interface DomesticService {
+  title: string;
+  path: string;
+  desc: string;
+}
 
+interface DomesticPageProps {
+  services: DomesticService[];
+}
+
+const DomesticPage: NextPage<DomesticPageProps> = ({ services = [] }) => {
   return (
     <div className="flex flex-col bg-white">
       {/* Hero Section - The gateway to family harmony */}
@@ -145,6 +117,58 @@ const DomesticPage: NextPage = () => {
       </main>
     </div>
   );
+};
+
+export const getStaticProps: GetStaticProps<DomesticPageProps> = async (): Promise<{ 
+  props: DomesticPageProps; 
+  revalidate: number 
+}> => {
+  // The sacred scrolls of family law services - each one a path to harmony
+  const services: DomesticService[] = [
+    {
+      title: 'Divorce',
+      path: 'divorce',
+      desc: 'Guiding you through the divorce process with compassion and dedication to protect your interests.'
+    },
+    {
+      title: 'Paternity',
+      path: 'paternity',
+      desc: 'Establishing legal rights and responsibilities for parents and children through paternity actions.'
+    },
+    {
+      title: 'Child Custody',
+      path: 'child-custody',
+      desc: 'Creating custody arrangements that serve the best interests of your children while protecting parental rights.'
+    },
+    {
+      title: 'Child Support',
+      path: 'child-support',
+      desc: "Ensuring fair child support arrangements that provide for your children's needs."
+    },
+    {
+      title: 'Child in Need of Care',
+      path: 'child-in-need-of-care',
+      desc: 'Protecting vulnerable children and working with families to create safe, stable environments.'
+    },
+    {
+      title: "Grandparent's Rights",
+      path: 'grandparents-rights',
+      desc: 'Advocating for grandparents seeking to maintain meaningful relationships with their grandchildren.'
+    },
+    {
+      title: 'Adoption',
+      path: 'adoption',
+      desc: 'Helping families grow through the adoption process, ensuring legal security for all parties.'
+    }
+  ];
+
+  return {
+    props: {
+      services,
+    },
+    // Keep our family bonds strong with weekly refresh cycles
+    revalidate: 604800,
+  };
 };
 
 export default DomesticPage;

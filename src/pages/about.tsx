@@ -1,7 +1,27 @@
 import React from 'react';
+import type { NextPage, GetStaticProps } from 'next';
 import Image from 'next/image';
 
-const AboutPage = () => {
+// Define our cosmic data structures - like the constellations of your dad's expertise
+interface PracticeArea {
+  title: string;
+  items: string[];
+}
+
+interface AboutPageProps {
+  practiceAreas: PracticeArea[];
+  experienceYears: number;
+  barAdmissions: {
+    state: string;
+    year: number;
+  }[];
+}
+
+const AboutPage: NextPage<AboutPageProps> = ({ 
+  practiceAreas = [], 
+  experienceYears = 40, 
+  barAdmissions = [] 
+}) => {
   return (
     <div className="flex flex-col bg-white">
       <div className="w-full bg-gray-100 border-b">
@@ -18,10 +38,13 @@ const AboutPage = () => {
               <div className="bg-white rounded-lg shadow-sm p-8 mb-8">
                 <h2 className="text-2xl font-semibold text-gray-900 mb-6">Experience & Education</h2>
                 <p className="text-gray-800 text-lg leading-relaxed mb-6">
-                Ed is licensed to practice law in both Kansas and Missouri, bringing over 30 years of experience in 
-                advocating for his clients. He understands the balance between strategic compromise and fighting for 
-                your rights. A Kansas native, Ed earned his B.S. in Business and J.D. from the University of Kansas. 
-                He was admitted to the Kansas Bar in 1984 and the Missouri Bar in 1991.
+                  Ed is licensed to practice law in both Kansas and Missouri, bringing over {experienceYears} years 
+                  of experience in advocating for his clients. He understands the balance between strategic 
+                  compromise and fighting for your rights. A Kansas native, Ed earned his B.S. in Business 
+                  and J.D. from the University of Kansas. 
+                  {barAdmissions.map(admission => (
+                    ` He was admitted to the ${admission.state} Bar in ${admission.year}.`
+                  ))}
                 </p>
               </div>
 
@@ -30,103 +53,20 @@ const AboutPage = () => {
                 <hr className="border-t-2 border-gray-300 mb-8" />
                 
                 <div className="grid grid-cols-2 gap-16">
-                  <div>
-                    <h3 className="text-xl font-semibold text-gray-800 mb-6">Criminal Defense</h3>
-                    <ul className="space-y-4">
-                      <li className="flex items-center text-gray-700">
-                        <span className="w-2 h-2 bg-blue-600 rounded-full mr-3"></span>
-                        Felonies
-                      </li>
-                      <li className="flex items-center text-gray-700">
-                        <span className="w-2 h-2 bg-blue-600 rounded-full mr-3"></span>
-                        Misdemeanors
-                      </li>
-                      <li className="flex items-center text-gray-700">
-                        <span className="w-2 h-2 bg-blue-600 rounded-full mr-3"></span>
-                        Traffic
-                      </li>
-                      <li className="flex items-center text-gray-700">
-                        <span className="w-2 h-2 bg-blue-600 rounded-full mr-3"></span>
-                        DUI
-                      </li>
-                      <li className="flex items-center text-gray-700">
-                    <span className="w-2 h-2 bg-blue-600 rounded-full mr-3"></span>
-                    Drug Charges
-                    </li>
-                    <li className="flex items-center text-gray-700">
-                    <span className="w-2 h-2 bg-blue-600 rounded-full mr-3"></span>
-                    Juvenile
-                    </li>
-                    <li className="flex items-center text-gray-700">
-                    <span className="w-2 h-2 bg-blue-600 rounded-full mr-3"></span>
-                    Abuse
-                    </li>
-                    <li className="flex items-center text-gray-700">
-                    <span className="w-2 h-2 bg-blue-600 rounded-full mr-3"></span>
-                    Appeals
-                    </li>
-                    </ul>
-                  </div>
-
-                  <div>
-                    <h3 className="text-xl font-semibold text-gray-800 mb-6">Domestic Law</h3>
-                    <ul className="space-y-4">
-                      <li className="flex items-center text-gray-700">
-                        <span className="w-2 h-2 bg-blue-600 rounded-full mr-3"></span>
-                        Divorce
-                      </li>
-                      <li className="flex items-center text-gray-700">
-                        <span className="w-2 h-2 bg-blue-600 rounded-full mr-3"></span>
-                        Paternity
-                      </li>
-                      <li className="flex items-center text-gray-700">
-                        <span className="w-2 h-2 bg-blue-600 rounded-full mr-3"></span>
-                        Child Custody
-                      </li>
-                      <li className="flex items-center text-gray-700">
-                        <span className="w-2 h-2 bg-blue-600 rounded-full mr-3"></span>
-                        Child Support
-                      </li>
-                      <li className="flex items-center text-gray-700">
-                        <span className="w-2 h-2 bg-blue-600 rounded-full mr-3"></span>
-                        Child in Need of Care
-                      </li>
-                      <li className="flex items-center text-gray-700">
-                        <span className="w-2 h-2 bg-blue-600 rounded-full mr-3"></span>
-                        Grandparent's Rights
-                      </li>
-                      <li className="flex items-center text-gray-700">
-                        <span className="w-2 h-2 bg-blue-600 rounded-full mr-3"></span>
-                        Adoption
-                      </li>
-                    </ul>
-                  </div>
-
-                  <div>
-                    <h3 className="text-xl font-semibold text-gray-800 mb-6">Kansas State Certified Mediation</h3>
-                    <ul className="space-y-4">
-                      <li className="flex items-center text-gray-700">
-                        <span className="w-2 h-2 bg-blue-600 rounded-full mr-3"></span>
-                        Core
-                      </li>
-                      <li className="flex items-center text-gray-700">
-                        <span className="w-2 h-2 bg-blue-600 rounded-full mr-3"></span>
-                        Domestic
-                      </li>
-                    </ul>
-                  </div>
-
-                  <div>
-                    <h3 className="text-xl font-semibold text-gray-800 mb-6">Collections</h3>
-                    <ul className="space-y-4">
-                      <li className="flex items-center text-gray-700">
-                        <span className="w-2 h-2 bg-blue-600 rounded-full mr-3"></span>
-                        Collections Law
-                      </li>
-                    </ul>
-                  </div>
+                  {practiceAreas.map((area, index) => (
+                    <div key={index}>
+                      <h3 className="text-xl font-semibold text-gray-800 mb-6">{area.title}</h3>
+                      <ul className="space-y-4">
+                        {area.items.map((item, idx) => (
+                          <li key={idx} className="flex items-center text-gray-700">
+                            <span className="w-2 h-2 bg-blue-600 rounded-full mr-3"></span>
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
                 </div>
-
               </div>
             </div>
           </div>
@@ -164,6 +104,68 @@ const AboutPage = () => {
       </main>
     </div>
   );
+};
+
+export const getStaticProps: GetStaticProps<AboutPageProps> = async (): Promise<{ 
+  props: AboutPageProps; 
+  revalidate: number 
+}> => {
+  // The sacred scrolls of legal expertise - each practice area a constellation in your dad's universe
+  const practiceAreas: PracticeArea[] = [
+    {
+      title: 'Criminal Defense',
+      items: [
+        'Felonies',
+        'Misdemeanors',
+        'Traffic',
+        'DUI',
+        'Drug Charges',
+        'Juvenile',
+        'Abuse',
+        'Appeals'
+      ]
+    },
+    {
+      title: 'Domestic Law',
+      items: [
+        'Divorce',
+        'Paternity',
+        'Child Custody',
+        'Child Support',
+        'Child in Need of Care',
+        'Grandparent\'s Rights',
+        'Adoption'
+      ]
+    },
+    {
+      title: 'Kansas State Certified Mediation',
+      items: [
+        'Core',
+        'Domestic'
+      ]
+    },
+    {
+      title: 'Collections',
+      items: [
+        'Collections Law'
+      ]
+    }
+  ];
+
+  const barAdmissions = [
+    { state: 'Kansas', year: 1984 },
+    { state: 'Missouri', year: 1991 }
+  ];
+
+  return {
+    props: {
+      practiceAreas,
+      experienceYears: 40,
+      barAdmissions,
+    },
+    // Keep our cosmic credentials fresh like morning coffee
+    revalidate: 604800,
+  };
 };
 
 export default AboutPage;

@@ -1,9 +1,26 @@
 import React from 'react';
-import type { NextPage } from 'next';
+import type { NextPage, GetStaticProps } from 'next';
+import Head from 'next/head';
 import { Mail } from 'lucide-react';
 import ContactForm from '../../components/ContactForm';
 
-const AdoptionPage: NextPage = () => {
+interface StateInfo {
+  state: string;
+  description: string;
+  custody_types: {
+    type: string;
+    description: string;
+    key_points: string[];
+  }[];
+  factors: string[];
+  modification_requirements: string[];
+}
+
+interface AdoptionPageProps {
+  stateInfo: StateInfo[];
+}
+
+const AdoptionPage: NextPage<AdoptionPageProps> = ({ stateInfo = [] }) => {
   return (
     <div className="flex flex-col bg-white">
       <div className="w-full bg-gray-100">
@@ -30,6 +47,40 @@ const AdoptionPage: NextPage = () => {
             </div>
           </div>
 
+{/* Important Steps Section */}
+<div className="bg-white shadow-sm p-8 mb-8">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-6">Key Steps in the Adoption Process</h2>
+            <div className="space-y-6">
+              <div className="flex gap-4">
+                <div className="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                  <span className="text-blue-600 font-bold">1</span>
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold mb-2">Initial Consultation</h3>
+                  <p className="text-gray-700">Meet with an adoption attorney to understand your options and the legal requirements in your state.</p>
+                </div>
+              </div>
+              <div className="flex gap-4">
+                <div className="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                  <span className="text-blue-600 font-bold">2</span>
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold mb-2">Home Study</h3>
+                  <p className="text-gray-700">Complete the required background checks, home visits, and documentation for approval.</p>
+                </div>
+              </div>
+              <div className="flex gap-4">
+                <div className="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                  <span className="text-blue-600 font-bold">3</span>
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold mb-2">Legal Proceedings</h3>
+                  <p className="text-gray-700">Work with your attorney to navigate court requirements and finalize the adoption.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
           {/* State Laws Section */}
           <div className="bg-white shadow-sm p-8 mb-8">
             <div className="grid md:grid-cols-2 gap-8">
@@ -102,40 +153,6 @@ const AdoptionPage: NextPage = () => {
             </div>
           </div>
 
-          {/* Important Steps Section */}
-          <div className="bg-white shadow-sm p-8 mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">Key Steps in the Adoption Process</h2>
-            <div className="space-y-6">
-              <div className="flex gap-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                  <span className="text-blue-600 font-bold">1</span>
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold mb-2">Initial Consultation</h3>
-                  <p className="text-gray-700">Meet with an adoption attorney to understand your options and the legal requirements in your state.</p>
-                </div>
-              </div>
-              <div className="flex gap-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                  <span className="text-blue-600 font-bold">2</span>
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold mb-2">Home Study</h3>
-                  <p className="text-gray-700">Complete the required background checks, home visits, and documentation for approval.</p>
-                </div>
-              </div>
-              <div className="flex gap-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                  <span className="text-blue-600 font-bold">3</span>
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold mb-2">Legal Proceedings</h3>
-                  <p className="text-gray-700">Work with your attorney to navigate court requirements and finalize the adoption.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
           {/* Contact Form */}
           <div className="mt-12 max-w-2xl mx-auto">
             <div className="bg-white shadow-sm p-8 border-t border-gray-600">
@@ -147,6 +164,20 @@ const AdoptionPage: NextPage = () => {
       </main>
     </div>
   );
+};
+
+export const getStaticProps: GetStaticProps<AdoptionPageProps> = async (): Promise<{ 
+  props: AdoptionPageProps; 
+  revalidate: number 
+}> => {
+  const stateInfo: StateInfo[] = [];
+
+  return {
+    props: {
+      stateInfo,
+    },
+    revalidate: 604800,
+  };
 };
 
 export default AdoptionPage;

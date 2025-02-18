@@ -1,35 +1,22 @@
 import React from 'react';
-import type { NextPage } from 'next';
+import type { NextPage, GetStaticProps } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Mail } from 'lucide-react';
 import ContactForm from '../components/ContactForm';
 
-const CollectionsPage: NextPage = () => {
-  // The sacred scrolls of collection services - each one a path to financial harmony
-  const services = [
-    {
-      title: 'Commercial Collections',
-      path: 'commercial',
-      desc: 'Comprehensive debt recovery services for businesses, including B2B collections, contract disputes, and commercial debt resolution.'
-    },
-    {
-      title: 'Consumer Collections',
-      path: 'consumer',
-      desc: 'Legal collection services for consumer debt, ensuring compliance with the Fair Debt Collection Practices Act and other relevant regulations.'
-    },
-    {
-      title: 'Judgment Enforcement',
-      path: 'judgment-enforcement',
-      desc: 'Strategic enforcement of judgments through various legal means, including wage garnishment, property liens, and asset discovery.'
-    },
-    {
-      title: 'Debt Settlement',
-      path: 'debt-settlement',
-      desc: 'Negotiation services to reach favorable settlements between creditors and debtors, often avoiding costly litigation.'
-    }
-  ];
+// Define the shape of our cosmic data structures
+interface CollectionService {
+  title: string;
+  path: string;
+  desc: string;
+}
 
+interface CollectionsPageProps {
+  services: CollectionService[];
+}
+
+const CollectionsPage: NextPage<CollectionsPageProps> = ({ services = [] }) => {
   return (
     <div className="flex flex-col bg-white">
       {/* Hero Section - The gateway to financial resolution */}
@@ -130,6 +117,43 @@ const CollectionsPage: NextPage = () => {
       </main>
     </div>
   );
+};
+
+export const getStaticProps: GetStaticProps<CollectionsPageProps> = async (): Promise<{ 
+  props: CollectionsPageProps; 
+  revalidate: number 
+}> => {
+  // The sacred scrolls of collection services - each one a path to financial harmony
+  const services: CollectionService[] = [
+    {
+      title: 'Commercial Collections',
+      path: 'commercial',
+      desc: 'Comprehensive debt recovery services for businesses, including B2B collections, contract disputes, and commercial debt resolution.'
+    },
+    {
+      title: 'Consumer Collections',
+      path: 'consumer',
+      desc: 'Legal collection services for consumer debt, ensuring compliance with the Fair Debt Collection Practices Act and other relevant regulations.'
+    },
+    {
+      title: 'Judgment Enforcement',
+      path: 'judgment-enforcement',
+      desc: 'Strategic enforcement of judgments through various legal means, including wage garnishment, property liens, and asset discovery.'
+    },
+    {
+      title: 'Debt Settlement',
+      path: 'debt-settlement',
+      desc: 'Negotiation services to reach favorable settlements between creditors and debtors, often avoiding costly litigation.'
+    }
+  ];
+
+  return {
+    props: {
+      services,
+    },
+    // Keep our cosmic ledger fresh
+    revalidate: 604800,
+  };
 };
 
 export default CollectionsPage;

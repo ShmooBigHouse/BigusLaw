@@ -1,9 +1,26 @@
 import React from 'react';
-import type { NextPage } from 'next';
+import type { NextPage, GetStaticProps } from 'next';
+import Head from 'next/head';
 import { Mail } from 'lucide-react';
 import ContactForm from '../../components/ContactForm';
 
-const GrandparentsRightsPage: NextPage = () => {
+interface StateInfo {
+  state: string;
+  description: string;
+  custody_types: {
+    type: string;
+    description: string;
+    key_points: string[];
+  }[];
+  factors: string[];
+  modification_requirements: string[];
+}
+
+interface GrandparentsRightsPageProps {
+  stateInfo: StateInfo[];
+}
+
+const GrandparentsRightsPage: NextPage<GrandparentsRightsPageProps> = ({ stateInfo = [] }) => {
   return (
     <div className="flex flex-col bg-white">
       <div className="w-full bg-gray-100">
@@ -27,6 +44,40 @@ const GrandparentsRightsPage: NextPage = () => {
               <p className="text-gray-800 text-lg leading-relaxed">
                 Grandparents play a vital role in the lives of their grandchildren, and both Kansas and Missouri have legal provisions that recognize and protect grandparents' rights under certain circumstances. Understanding these rights and the legal processes involved is crucial for grandparents seeking to maintain meaningful relationships with their grandchildren.
               </p>
+            </div>
+          </div>
+
+{/* Legal Considerations Section */}
+<div className="bg-white shadow-sm p-8 mb-8">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-6">Important Legal Considerations</h2>
+            <div className="space-y-6">
+              <div className="flex gap-4">
+                <div className="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                  <span className="text-blue-600 font-bold">1</span>
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold mb-2">Document Your Relationship</h3>
+                  <p className="text-gray-700">Maintain records of your involvement in your grandchild's life, including visits, communications, and any financial support provided.</p>
+                </div>
+              </div>
+              <div className="flex gap-4">
+                <div className="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                  <span className="text-blue-600 font-bold">2</span>
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold mb-2">Seek Legal Counsel</h3>
+                  <p className="text-gray-700">Consult with an experienced family law attorney to understand your rights and the specific legal standards in your jurisdiction.</p>
+                </div>
+              </div>
+              <div className="flex gap-4">
+                <div className="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                  <span className="text-blue-600 font-bold">3</span>
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold mb-2">Consider Mediation</h3>
+                  <p className="text-gray-700">Explore alternative dispute resolution methods to maintain family relationships and avoid costly litigation when possible.</p>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -92,52 +143,6 @@ const GrandparentsRightsPage: NextPage = () => {
                       <li>The court determines it's in the best interests of the child</li>
                     </ul>
                   </div>
-
-                  <div className="pl-4 border-l-4 border-blue-600">
-                    <h3 className="text-xl font-semibold mb-3">Legal Process</h3>
-                    <p className="text-gray-800">
-                      Grandparents must file a petition in the appropriate court. The court evaluates:
-                    </p>
-                    <ul className="list-disc pl-6 space-y-2 mt-2">
-                      <li>The existing relationship between grandparent and grandchild</li>
-                      <li>The child's needs and best interests</li>
-                      <li>Potential impact on the parent-child relationship</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Legal Considerations Section */}
-          <div className="bg-white shadow-sm p-8 mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">Important Legal Considerations</h2>
-            <div className="space-y-6">
-              <div className="flex gap-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                  <span className="text-blue-600 font-bold">1</span>
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold mb-2">Document Your Relationship</h3>
-                  <p className="text-gray-700">Maintain records of your involvement in your grandchild's life, including visits, communications, and any financial support provided.</p>
-                </div>
-              </div>
-              <div className="flex gap-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                  <span className="text-blue-600 font-bold">2</span>
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold mb-2">Seek Legal Counsel</h3>
-                  <p className="text-gray-700">Consult with an experienced family law attorney to understand your rights and the specific legal standards in your jurisdiction.</p>
-                </div>
-              </div>
-              <div className="flex gap-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                  <span className="text-blue-600 font-bold">3</span>
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold mb-2">Consider Mediation</h3>
-                  <p className="text-gray-700">Explore alternative dispute resolution methods to maintain family relationships and avoid costly litigation when possible.</p>
                 </div>
               </div>
             </div>
@@ -154,6 +159,20 @@ const GrandparentsRightsPage: NextPage = () => {
       </main>
     </div>
   );
+};
+
+export const getStaticProps: GetStaticProps<GrandparentsRightsPageProps> = async (): Promise<{ 
+  props: GrandparentsRightsPageProps; 
+  revalidate: number 
+}> => {
+  const stateInfo: StateInfo[] = [];
+
+  return {
+    props: {
+      stateInfo,
+    },
+    revalidate: 604800,
+  };
 };
 
 export default GrandparentsRightsPage;

@@ -1,9 +1,26 @@
 import React from 'react';
-import type { NextPage } from 'next';
+import type { NextPage, GetStaticProps } from 'next';
+import Head from 'next/head';
 import { Mail } from 'lucide-react';
 import ContactForm from '../../components/ContactForm';
 
-const ChildInNeedPage: NextPage = () => {
+interface StateInfo {
+  state: string;
+  description: string;
+  custody_types: {
+    type: string;
+    description: string;
+    key_points: string[];
+  }[];
+  factors: string[];
+  modification_requirements: string[];
+}
+
+interface ChildInNeedPageProps {
+  stateInfo: StateInfo[];
+}
+
+const ChildInNeedPage: NextPage<ChildInNeedPageProps> = ({ stateInfo = [] }) => {
   return (
     <div className="flex flex-col bg-white">
       <div className="w-full bg-gray-100">
@@ -26,6 +43,16 @@ const ChildInNeedPage: NextPage = () => {
             <div className="bg-white shadow-sm p-8 border-b border-gray-600">
               <p className="text-gray-800 text-lg leading-relaxed">
                 In both Kansas and Missouri, the welfare of children is a paramount concern, leading to specific legal frameworks addressing situations where a child may require state intervention for their protection and well-being.
+              </p>
+            </div>
+          </div>
+
+          {/* Conclusion Section */}
+          <div className="bg-white shadow-sm p-8 mb-8">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-6">Legal Support in Child Welfare Cases</h2>
+            <div className="pl-4 border-l-4 border-blue-600">
+              <p className="text-gray-800">
+                Both Kansas and Missouri have established legal procedures to protect children who may be in vulnerable situations. These processes aim to ensure the safety and well-being of the child while balancing the rights and responsibilities of parents or guardians. Given the complexities of such cases, consulting with a legal professional experienced in child welfare law is advisable for those involved.
               </p>
             </div>
           </div>
@@ -94,16 +121,6 @@ const ChildInNeedPage: NextPage = () => {
             </div>
           </div>
 
-          {/* Conclusion Section */}
-          <div className="bg-white shadow-sm p-8 mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">Legal Support in Child Welfare Cases</h2>
-            <div className="pl-4 border-l-4 border-blue-600">
-              <p className="text-gray-800">
-                Both Kansas and Missouri have established legal procedures to protect children who may be in vulnerable situations. These processes aim to ensure the safety and well-being of the child while balancing the rights and responsibilities of parents or guardians. Given the complexities of such cases, consulting with a legal professional experienced in child welfare law is advisable for those involved.
-              </p>
-            </div>
-          </div>
-
           {/* Contact Form */}
           <div className="mt-12 max-w-2xl mx-auto">
             <div className="bg-white shadow-sm p-8 border-t border-gray-600">
@@ -115,6 +132,20 @@ const ChildInNeedPage: NextPage = () => {
       </main>
     </div>
   );
+};
+
+export const getStaticProps: GetStaticProps<ChildInNeedPageProps> = async (): Promise<{ 
+  props: ChildInNeedPageProps; 
+  revalidate: number 
+}> => {
+  const stateInfo: StateInfo[] = [];
+
+  return {
+    props: {
+      stateInfo,
+    },
+    revalidate: 604800,
+  };
 };
 
 export default ChildInNeedPage;

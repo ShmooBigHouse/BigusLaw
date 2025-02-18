@@ -45,3 +45,8 @@ body {
 .contact-info a:hover {
   color: var(--primary-blue);
 }
+
+.rounded-t-lg {
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}

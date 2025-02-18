@@ -1,55 +1,27 @@
 import React from 'react';
-import type { NextPage } from 'next';
+import type { NextPage, GetStaticProps } from 'next';
 import Image from 'next/image';
 import { Mail } from 'lucide-react';
 import ContactForm from '../../components/ContactForm';
 import Head from 'next/head';
 
-const DomesticMediationPage: NextPage = () => {
-  // Let's define our cosmic data right here in the component - keeping it all in the same dimensional plane
-  const benefits = [
-    {
-      title: 'Less Stressful Environment',
-      description: 'Mediation fosters communication and cooperation, reducing the emotional toll on all parties.'
-    },
-    {
-      title: 'Child-Focused Approach',
-      description: 'Decisions are made with the best interests of children in mind, protecting their well-being throughout the process.'
-    },
-    {
-      title: 'More Affordable',
-      description: 'Avoid the high costs of lengthy court battles and significantly reduce legal fees.'
-    },
-    {
-      title: 'Faster Resolution',
-      description: 'Complete the process in weeks rather than the months or years often required for court proceedings.'
-    },
-    {
-      title: 'Flexible Solutions',
-      description: 'Create personalized agreements that best suit your familys unique situation and needs.'
-    }
-  ];
+// Our cosmic data structures for peace and harmony
+interface Benefit {
+  title: string;
+  description: string;
+}
 
-  const issues = [
-    {
-      title: 'Divorce Matters',
-      items: [
-        'Division of assets and property',
-        'Spousal support arrangements',
-        'Retirement and pension distribution'
-      ]
-    },
-    {
-      title: 'Child-Related Issues',
-      items: [
-        'Child custody and parenting time',
-        'Child support modifications',
-        'Paternity-related disputes',
-        'Grandparents rights and visitation'
-      ]
-    }
-  ];
+interface IssueCategory {
+  title: string;
+  items: string[];
+}
 
+interface DomesticMediationPageProps {
+  benefits: Benefit[];
+  issues: IssueCategory[];
+}
+
+const DomesticMediationPage: NextPage<DomesticMediationPageProps> = ({ benefits = [], issues = [] }) => {
   return (
     <>
       <Head>
@@ -154,6 +126,64 @@ const DomesticMediationPage: NextPage = () => {
       </div>
     </>
   );
+};
+
+export const getStaticProps: GetStaticProps<DomesticMediationPageProps> = async (): Promise<{ 
+  props: DomesticMediationPageProps; 
+  revalidate: number 
+}> => {
+  // Our peaceful data constellations 🌟
+  const benefits: Benefit[] = [
+    {
+      title: 'Less Stressful Environment',
+      description: 'Mediation fosters communication and cooperation, reducing the emotional toll on all parties.'
+    },
+    {
+      title: 'Child-Focused Approach',
+      description: 'Decisions are made with the best interests of children in mind, protecting their well-being throughout the process.'
+    },
+    {
+      title: 'More Affordable',
+      description: 'Avoid the high costs of lengthy court battles and significantly reduce legal fees.'
+    },
+    {
+      title: 'Faster Resolution',
+      description: 'Complete the process in weeks rather than the months or years often required for court proceedings.'
+    },
+    {
+      title: 'Flexible Solutions',
+      description: 'Create personalized agreements that best suit your family\'s unique situation and needs.'
+    }
+  ];
+
+  const issues: IssueCategory[] = [
+    {
+      title: 'Divorce Matters',
+      items: [
+        'Division of assets and property',
+        'Spousal support arrangements',
+        'Retirement and pension distribution'
+      ]
+    },
+    {
+      title: 'Child-Related Issues',
+      items: [
+        'Child custody and parenting time',
+        'Child support modifications',
+        'Paternity-related disputes',
+        'Grandparents rights and visitation'
+      ]
+    }
+  ];
+
+  return {
+    props: {
+      benefits,
+      issues,
+    },
+    // Keep our peaceful vibes fresh like morning dew
+    revalidate: 604800,
+  };
 };
 
 export default DomesticMediationPage;

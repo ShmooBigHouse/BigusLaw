@@ -1,15 +1,22 @@
-import type { NextPage, GetServerSideProps } from 'next';
+import type { NextPage, GetStaticProps } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Mail } from 'lucide-react';
 import { useState } from 'react';
 
-// Define types for our props
-interface HomeProps {
-  currentYear: number;
+// Cosmic type definitions for our digital law office
+interface PracticeArea {
+  title: string;
+  path: string;
+  description: string;
 }
 
-const Home: NextPage<HomeProps> = ({ currentYear }) => {
+interface HomePageProps {
+  currentYear: number;
+  practiceAreas: PracticeArea[];
+}
+
+const Home: NextPage<HomePageProps> = ({ currentYear = new Date().getFullYear(), practiceAreas = [] }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -23,7 +30,7 @@ const Home: NextPage<HomeProps> = ({ currentYear }) => {
 
   return (
     <div className="flex flex-col w-full overflow-hidden">
-      {/* Hero Section - Mobile Responsive */}
+      {/* Hero Section - The cosmic gateway to justice */}
       <section className="relative bg-gray-100 border-b w-full">
         <div className="w-full px-4 py-8 md:py-20 md:container md:mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
@@ -60,7 +67,7 @@ const Home: NextPage<HomeProps> = ({ currentYear }) => {
         </div>
       </section>
 
-      {/* About Section - Mobile Responsive */}
+      {/* About Section - The story of our legal guardian */}
       <section className="py-8 md:py-16 bg-white">
         <div className="container mx-auto px-4">
           <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-6">
@@ -76,59 +83,33 @@ const Home: NextPage<HomeProps> = ({ currentYear }) => {
         </div>
       </section>
 
-      {/* Practice Areas - Mobile Responsive */}
+      {/* Practice Areas - The constellations of legal expertise */}
       <section className="py-8 md:py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-6">
             Practice Areas
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-            <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
-              <h3 className="text-lg md:text-xl font-semibold mb-4">
-                <Link href="/criminal-defense" className="text-blue-900 hover:underline decoration-2 underline-offset-4 transition-all duration-300">
-                  Criminal Defense
+            {practiceAreas.map((area) => (
+              <div key={area.path} className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <h3 className="text-lg md:text-xl font-semibold mb-4">
+                  <Link href={area.path} className="text-blue-900 hover:underline decoration-2 underline-offset-4 transition-all duration-300">
+                    {area.title}
+                  </Link>
+                </h3>
+                <p className="text-sm md:text-base text-gray-600 mb-4">
+                  {area.description}
+                </p>
+                <Link href={area.path} className="text-blue-600 hover:text-blue-800">
+                  Learn More →
                 </Link>
-              </h3>
-              <p className="text-sm md:text-base text-gray-600 mb-4">
-                Experienced representation in felonies, misdemeanors, DUI, drug charges, juvenile cases, 
-                traffic violations, and appeals.
-              </p>
-              <Link href="/criminal-defense" className="text-blue-600 hover:text-blue-800">
-                Learn More →
-              </Link>
-            </div>
-                        <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
-              <h3 className="text-lg md:text-xl font-semibold mb-4">
-                <Link href="/domestic" className="text-blue-900 hover:underline decoration-2 underline-offset-4 transition-all duration-300">
-                  Domestic Law
-                </Link>
-              </h3>
-              <p className="text-sm md:text-base text-gray-600 mb-4">
-                Comprehensive family law services including divorce, custody, support, adoption, 
-                and grandparents' rights.
-              </p>
-              <Link href="/domestic" className="text-blue-600 hover:text-blue-800">
-                Learn More →
-              </Link>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
-              <h3 className="text-lg md:text-xl font-semibold mb-4">
-                <Link href="/mediation" className="text-blue-900 hover:underline decoration-2 underline-offset-4 transition-all duration-300">
-                  Mediation
-                </Link>
-              </h3>
-              <p className="text-sm md:text-base text-gray-600 mb-4">
-                Kansas State Certified Mediator offering both core and domestic mediation services.
-              </p>
-              <Link href="/mediation" className="text-blue-600 hover:text-blue-800">
-                Learn More →
-              </Link>
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Contact Form - Mobile Responsive */}
+      {/* Contact Form - The bridge to legal enlightenment */}
       <section className="py-8 md:py-16 bg-white">
         <div className="container mx-auto px-4 max-w-2xl">
           <h2 className="text-xl md:text-2xl font-semibold text-center text-gray-900 mb-6">
@@ -150,7 +131,7 @@ const Home: NextPage<HomeProps> = ({ currentYear }) => {
                 onChange={(e) => setFormData({...formData, name: e.target.value})}
               />
             </div>
-                        <div>
+            <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
                 Email
               </label>
@@ -193,14 +174,36 @@ const Home: NextPage<HomeProps> = ({ currentYear }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  // Get the current year for copyright notices or other dynamic data
-  const currentYear = new Date().getFullYear();
+export const getStaticProps: GetStaticProps<HomePageProps> = async (): Promise<{ 
+  props: HomePageProps; 
+  revalidate: number 
+}> => {
+  // Our practice areas - like the constellations in your dad's legal universe
+  const practiceAreas: PracticeArea[] = [
+    {
+      title: 'Criminal Defense',
+      path: '/criminal-defense',
+      description: 'Experienced representation in felonies, misdemeanors, DUI, drug charges, juvenile cases, traffic violations, and appeals.'
+    },
+    {
+      title: 'Domestic Law',
+      path: '/domestic',
+      description: 'Comprehensive family law services including divorce, custody, support, adoption, and grandparents\' rights.'
+    },
+    {
+      title: 'Mediation',
+      path: '/mediation',
+      description: 'Kansas State Certified Mediator offering both core and domestic mediation services.'
+    }
+  ];
 
   return {
     props: {
-      currentYear,
+      currentYear: new Date().getFullYear(),
+      practiceAreas,
     },
+    // Keep our cosmic content fresh
+    revalidate: 604800,
   };
 };
 

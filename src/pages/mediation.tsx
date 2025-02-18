@@ -1,28 +1,25 @@
 import React from 'react';
-import type { NextPage } from 'next';
+import type { NextPage, GetStaticProps } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Mail } from 'lucide-react';
 import ContactForm from '../components/ContactForm';
 
-const MediationPage: NextPage = () => {
-  // Define services directly in the component - like having your teapot right where you need it
-  const services = [
-    {
-      title: 'Core Mediation',
-      path: 'core',
-      desc: 'General dispute resolution services for civil matters, business conflicts, and other non-family disputes requiring neutral third-party facilitation.'
-    },
-    {
-      title: 'Domestic Mediation',
-      path: 'domestic',
-      desc: 'Specialized mediation services for family law matters including divorce, custody arrangements, and other domestic disputes requiring sensitive handling.'
-    }
-  ];
+// Our cosmic type definitions - like mantras for our digital meditation
+interface MediationService {
+  title: string;
+  path: string;
+  desc: string;
+}
 
+interface MediationPageProps {
+  services: MediationService[];
+}
+
+const MediationPage: NextPage<MediationPageProps> = ({ services = [] }) => {
   return (
     <div className="flex flex-col bg-white">
-      {/* Hero Section - Now with responsive superpowers */}
+      {/* Hero Section - The gateway to inner peace */}
       <div className="w-full bg-gray-100 border-b">
         <div className="container mx-auto px-4 py-8 md:py-12">
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 md:mb-6">Mediation Services</h1>
@@ -42,9 +39,13 @@ const MediationPage: NextPage = () => {
           <div className="bg-white rounded-lg shadow-sm p-4 md:p-8 mb-8">
             <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-center">
               <div className="flex-1">
-                <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-4 md:mb-6">Resolving Disputes Through Mediation</h2>
+                <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-4 md:mb-6">
+                  Resolving Disputes Through Mediation
+                </h2>
                 <p className="text-base md:text-lg text-gray-800 leading-relaxed mb-4 md:mb-6">
-                  Mediation offers a practical and less confrontational way to resolve family law matters. Instead of relying on a judge's decision, mediation allows both parties to work toward a mutually agreeable solution with the guidance of a neutral mediator.
+                  Mediation offers a practical and less confrontational way to resolve family law matters. 
+                  Instead of relying on a judge's decision, mediation allows both parties to work toward 
+                  a mutually agreeable solution with the guidance of a neutral mediator.
                 </p>
                 <div className="space-y-2 md:space-y-4 mb-6">
                   <h3 className="text-xl font-semibold text-gray-900">How Mediation Can Help:</h3>
@@ -72,9 +73,11 @@ const MediationPage: NextPage = () => {
             </div>
           </div>
 
-          {/* Services Grid - Responsive card layout */}
+          {/* Services Grid - The paths to peace */}
           <div className="bg-white rounded-lg shadow-sm p-4 md:p-8">
-            <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-4 md:mb-6">Our Mediation Services</h2>
+            <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-4 md:mb-6">
+              Our Mediation Services
+            </h2>
             <hr className="border-t-2 border-gray-300 mb-6 md:mb-8" />
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
@@ -97,7 +100,7 @@ const MediationPage: NextPage = () => {
             </div>
           </div>
 
-          {/* Contact Form - Mobile-optimized layout */}
+          {/* Contact Form - The bridge to harmony */}
           <div className="bg-white rounded-lg shadow-sm p-4 md:p-8 mt-8 md:mt-12 max-w-2xl mx-auto">
             <h2 className="text-xl md:text-2xl font-semibold text-center text-gray-900 mb-4 md:mb-6">
               Contact Us About Mediation
@@ -109,6 +112,33 @@ const MediationPage: NextPage = () => {
       </main>
     </div>
   );
+};
+
+export const getStaticProps: GetStaticProps<MediationPageProps> = async (): Promise<{ 
+  props: MediationPageProps; 
+  revalidate: number 
+}> => {
+  // The sacred scrolls of mediation services - each one a path to harmony
+  const services: MediationService[] = [
+    {
+      title: 'Core Mediation',
+      path: 'core',
+      desc: 'General dispute resolution services for civil matters, business conflicts, and other non-family disputes requiring neutral third-party facilitation.'
+    },
+    {
+      title: 'Domestic Mediation',
+      path: 'domestic',
+      desc: 'Specialized mediation services for family law matters including divorce, custody arrangements, and other domestic disputes requiring sensitive handling.'
+    }
+  ];
+
+  return {
+    props: {
+      services,
+    },
+    // Keep our peaceful vibes fresh like morning tea
+    revalidate: 604800,
+  };
 };
 
 export default MediationPage;
